@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+
+% operators declaration
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+
+% Original Functions
+\newcommand{\NotDefinedsinh}[2]{\operatorname{\sinh_{#1}\text{#2}}}
+\newcommand{\NotDefinedcsch}[2]{\operatorname{\csch_{#1}\text{#2}}}
+\newcommand{\NotDefinedcosh}[2]{\operatorname{cosh}_{#1}\text{#2}}
+\newcommand{\NotDefinedsech}[2]{\operatorname{\sech_{#1}\text{#2}}}
+\newcommand{\NotDefinedarccosh}[2]{\operatorname{\cosh_{#1}^{-1}\text{#2}}}
+\title{A Generalization of Macdonald functions and  Kontorovich–Lebedev transform using generalized hyperbolic functions}
+\author{Faisal Khaled}
+\date{May 2026}
+
+\begin{document}
+    
+\maketitle
+\begin{abstract}
+The Kontorovich–Lebedev transform is a powerful index transform in mathematics and theoretical physics, built upon modified Bessel functions of the second kind. In this paper, we introduce a novel generalization of both the modified Bessel functions and their corresponding Kontorovich–Lebedev transform framework, utilizing Riccati's generalized hyperbolic functions as formalized by Ungar \cite{Ungar1982}. We prove orthogonality of the generalized kernel via distribution theory, derive the corresponding inversion formula, establish asymptotic behavior at both boundaries, derive a recurrence relation for even order, and prove Parseval's identity for the extended transform.
+\end{abstract}
+\tableofcontents
+\section{Prerequisite}
+Define Generalized $\cosh(x)$ as the "main cyclic function" of the $n$-th order as\cite{Ungar1982}: 
+\[\NotDefinedcosh{n}{}(x):=\sum_{k=0}^\infty \frac{x^{nk}}{(nk)!}=\frac{1}{n}\sum_{m=0}^{n-1}e^{\omega^m x}, 
+\quad \{x\in \mathbb{R},n\in\mathbb{N},\omega = e^{\frac{2\pi i}{n}}\}\]
+Which is positive for all real valued $x$ in $e^{\omega x}$\\
+Define the generalization of $\sinh(x)$ as the family of functions $\NotDefinedsinh{n}{K}(x)$ where 
+\[\NotDefinedsinh{n}{K}(x):=\frac{d^K}{dx^K}\NotDefinedcosh{n}{}(x) \implies \NotDefinedsinh{n}{K}(x) =\frac{1}{n}\sum_{m=0}^{n-1}\omega^{mK}e^{\omega^m x}\]
+Let $K_{\nu}(x)$ denote the Modified Bessel function of the second kind using integral representation as \cite{NIST:2010}
+\[K_{\nu}(x) = \int_{0}^{\infty}e^{-x\cosh(t)}\cosh(\nu t)dt \quad \text{Re}(x)>0\]
+Let $\mathcal{F}_c\{f(t)\}(x) = \int_0^\infty f(t) \cos(x t) \, dt$ denote the Fourier cosine transform of $f(t)$
+\section{Motivation and Generalization}
+when defining $\NotDefinedsech{n}{}(t)$ using $\NotDefinedcosh{n}{}(t)$ we write it as $\NotDefinedsech{n}{}(t) = \frac{1}{\NotDefinedcosh{n}{}(t)}$, Observe that using $\frac{1}{A} = \int_{0}^{\infty}e^{-tA}dt$ we can write $\NotDefinedsech{n}{}(x)$ as follows
+\[\NotDefinedsech{n}{}(t) = \int_{0}^{\infty}e^{-x\NotDefinedcosh{n}{}(t)}dx\]
+Taking the Fourier cosine transform of such a function returns
+\[\mathcal{F}_c\{\NotDefinedsech{n}{}(t)\}(\nu) = \int_{0}^{\infty} \left[ \int_{0}^{\infty}e^{-x\cosh_n(t)}dx \right] \cos(\nu t) \, dt\]
+Swapping the order of integration via Fubini's theorem then yields:
+\[= \int_{0}^{\infty} \left[ \int_{0}^{\infty}e^{-x\cosh_n(t)}\cos(\nu t) \, dt \right] dx = \int_{0}^{\infty} K_{i\nu}^{(n)}(x) \, dx\]
+At $n=2$ we see the definition of $K_{i\nu}(x)$, thus a generalization can be considered
+\[K_{i\nu}^{(n)}(x)=\int_{0}^{\infty}e^{-x\NotDefinedcosh{n}{}(t)}\cos(\nu t)dt \implies K_{\nu}^{(n)}(x)=\int_{0}^{\infty}e^{-x\NotDefinedcosh{n}{}(t)}\cosh(\nu t)dt\]
+\section{Singular behavior of $K_0^{(n)}(x)$}
+The integral of $K^{(n)}_{0}(x)$ is
+\[K^{(n)}_{0}(x) = \int_{0}^{\infty}e^{-x\NotDefinedcosh{n}{}(t)}dt\]
+Let's split this integral into two integrals
+\[K^{(n)}_{0}(x) = \int_{0}^{A}e^{-x\NotDefinedcosh{n}{}(t)}dt+\int_{A}^{\infty}e^{-x\NotDefinedcosh{n}{}(t)}dt\]
+as $x\to 0$ the first term equal $A$, and for the second term we know that the power grows like $\frac{1}{n}e^t$ for large $t$,now we can do a u-substitution $du = \frac{x}{n} e^t dt = u \, dt$, so $dt = \frac{du}{u}$, when $t=A$, $u = \frac{x}{n} e^A$. When $t \to \infty$, $u \to \infty$
+\[I = \int_{A}^{\infty}e^{-\frac{x}{n}e^t}dt \approx {I}_{\text{tail}} \approx \int_{\frac{x}{n} e^A}^{\infty} \frac{e^{-u}}{u} du\]
+This is the definition of the Exponential integral $E_1(x)= \int_1^\infty \frac{e^{-xt}}{t} \, dt$, and as $x\to 0$ in this integral we get$E_1(x) = -\gamma - \ln(x) + x - \dots$ where $\gamma$ is the Euler-Mascheroni constant, Substituting $x = \frac{x}{n} e^A$ 
+\[I\approx -\ln\left(\frac{x e^A}{n}\right) - \gamma = -\ln(x) +\ln(n) - A - \gamma\]
+which means that as $x \to 0$, the constant terms become irrelevant compared to the term that goes to infinity, Therefore $K_0^{(n)}(x) \sim -\ln(x)$
+\section{Boundary Behavior of $K_{i\mu}^{(n)}(x)$}
+outside of the $x=0$ case , we can find the behavior of the function using $\NotDefinedcosh{n}{}(t) = \sum_{k=0}^\infty \frac{t^{nk}}{(nk)!} = 1 + \frac{t^n}{n!} + \mathcal{O}(t^{2n})$
+We can apply Laplace's method to find the exact asymptotic behavior of the kernel as $x \to \infty$:
+\[K_{i\mu}^{(n)}(x) = \int_0^\infty e^{-x \cosh_n(t)} \cos(\mu t) \, dt \sim e^{-x} \int_0^\infty e^{-x \frac{t^n}{n!}} \, dt\]
+By making the substitution $u = \frac{x}{n!}t^n$, the integral evaluates directly to a Gamma function
+\[K_{i\mu}^{(n)}(x) \sim e^{-x} x^{-1/n} \left(n!\right)^{1/n} \Gamma\left(1 + \frac{1}{n}\right) \quad \text{as } x \to \infty\]
+at $n=2$ $e^{-x} x^{-1/2} \left(n!\right)^{1/2} \Gamma\left(\frac{3}{2}\right) = \sqrt{\frac{\pi}{2x}}e^{-x}$ which is the classic result for $K_\nu(x)$
+and as $x \to 0^+$, the tail of the integral is dominated by the largest real exponential branch of $\cosh_n(t) \sim \frac{1}{n}e^t$
+\[K_{i\mu}^{(n)}(x) = \begin{cases} \mathcal{O}(\log(1/x)) & \text{if } \mu = 0 \\ \mathcal{O}(1) \text{ (bounded oscillation)} & \text{if } \mu > 0 \end{cases} \quad \text{as } x \to 0^+\]
+\section{Proofs for Generalized Kontorovich–Lebedev transform}
+\subsection{Orthogonality of $K^{(n)}_{i\beta}$ proof using distribution theory}
+Since $K_{iv}(x)$ is orthogonal with respect to the measure $\frac{dx}{x}$,let's try to prove it with respect to the measure $w(x)dx$\\
+let
+\[\int_{0}^{\infty}K^{(n)}_{i\nu}(x)K^{(n)}_{iv}(x)w(x)dx = \Omega(n,\mu,\nu)\delta(\mu-\nu)\]
+where $\delta(\mu-\nu)$ is the Dirac delta function, $\Omega(n,\mu,\nu)$ is an unknown normalization factor depending on $n,\mu,\nu$\\
+Expand using the left-hand side integral definitions
+\[I=\int_{0}^{\infty}\int_{0}^{\infty}\cos(\mu t)\cos(\nu u) \int_{0}^{\infty}w(x)e^{-x(\NotDefinedcosh{n}{}(t)+\NotDefinedcosh{n}{}(u))}dxdudt\]
+assume $w(x) = \frac{1}{x}$ as in the case of $n =2$, then integrate by parts $\frac{\partial}{\partial t}$ then $\frac{\partial}{\partial u}$.
+\[I= \frac{1}{\mu\nu}\int_{0}^{\infty}\int_{0}^{\infty}\sin(\mu t)\sin(\nu u) \frac{\NotDefinedsinh{n}{}(t)\NotDefinedsinh{n}{}(u)}{(\NotDefinedcosh{n}{}(t)+\NotDefinedcosh{n}{}(u))^2}dudt\]
+for the result to be a delta function, the kernel $\frac{\NotDefinedsinh{n}{}(t)\NotDefinedsinh{n}{}(u)}{(\NotDefinedcosh{n}{}(t)+\NotDefinedcosh{n}{}(u))^2}$must act like a sharp ridge along the line $t = u$ as $t, u \to \infty$. From the definition of $\NotDefinedcosh{n}{}(x)$ the $ \lim_{x\to \infty}\NotDefinedcosh{n}{}(x)\approx \frac{1}{n}e^{x}$,
+We can substitute these approximations into the kernel
+\[\frac{\NotDefinedsinh{n}{}(t)\NotDefinedsinh{n}{}(u)}{(\NotDefinedcosh{n}{}(t)+\NotDefinedcosh{n}{}(u))^2}\approx \frac{(\frac{1}{n}e^t)(\frac{1}{n}^u)}{(\frac{1}{n}e^{t}+\frac{1}{n}e^{u})^2} = \frac{e^{t+u}}{(e^{t}+e^{u})^2}=\frac{e^{t+u}}{(2 e^{(t+u)/2} \cosh(\frac{t-u}{2}))^2}\]
+\[\frac{e^{t+u}}{4 e^{(t+u)/2} \cosh(\frac{t-u}{2})^2} = \frac{1}{4\cosh(\frac{t-u}{2})^2}\]
+This asymptotic approximation is valid in the limit $t,u \to \infty$ where the integral is dominated, as the kernel exhibits a sharp peak along $t = u$. Contributions from finite $t,u$ are negligible in forming the delta function.\\
+let $y = \frac{t-u}{2}$ and $x=\frac{t+u}{2}$, therefore $t= x+y,u=x-y$ and $dudt = 2dxdy$, then we use the $\sin(a)\sin(b)$ formula
+\[I= \frac{1}{\mu\nu}\int_{-\infty}^{\infty}\frac{1}{4\cosh(y)^2}\int_{|y|}^{\infty}[\cos((\mu-\nu)x + (\mu+\nu)y) - \cos((\mu+\nu)x + (\mu-\nu)y)] dxdy\]
+In distribution theory, $\int_{0}^{\infty} \cos(Ax + B) dx = \pi \delta(A) \cos(B)$\\
+When $A=\mu-\nu$, this formula returns, otherwise it vanishes\\
+when $\delta(\mu-\nu)$ doesn't vanish(at $\mu = \nu$), the integral is
+\[I= \frac{\pi\delta(\mu-\nu)}{4\mu^2}\int_{-\infty}^{\infty}\frac{\cos(2\mu y)}{\cosh(y)^2}dy \]
+\[I = \frac{\pi \delta(\mu-\nu)}{4\mu^2} \times\frac{2\pi \mu}{\sinh(\pi \mu)} = \frac{\pi^2}{2\mu \sinh(\pi \mu)} \delta(\mu-\nu)\]
+Which proves its orthogonality, in fact, its orthogonality is invariant under $n$ order
+\subsection{Proof of generalized Kontorovich–Lebedev using Fourier cosine }
+The Kontorovich–Lebedev transform for a function $f(x)$ is defined as\cite{Yakubovich1996}
+\[F(\nu) = \int_{0}^{\infty}f(x)K_{i\nu}(x)\frac{dx}{x}\]
+with the inverse being
+\[f(x) = \frac{2}{\pi^2}\int_{0}^{\infty}F(\nu)\nu\sinh(\pi\nu)K_{i\nu}(x){d\nu}\]
+Similarly , let the generalized Kontorovich-Lebedev transform be defined as
+\[F_n(\mu) = \int_0^\infty f(x)K_{i\mu}^{(n)}(x)\frac{dx}{x}\]
+We propose that the inverse transform is given by the synthesis operator $g(x)$:
+\[g(x) = \frac{2}{\pi^2}\int_0^\infty F_n(\nu)\nu\sinh(\pi\nu)K_{i\nu}^{(n)}(x)d\nu\]To prove that $g(x) = f(x)$, we project $g(x)$ back into the transform space by multiplying both sides by $K_{i\mu}^{(n)}(x)/x$ and integrating over $x \in (0, \infty)$
+\[\int_0^\infty g(x)K_{i\mu}^{(n)}(x)\frac{dx}{x} = \int_0^\infty \left[ \frac{2}{\pi^2}\int_0^\infty F_n(\nu)\nu\sinh(\pi\nu)K_{i\nu}^{(n)}(x)d\nu \right] K_{i\mu}^{(n)}(x)\frac{dx}{x}\]
+Assuming $f(x)$ belongs to a suitable weighted functional space such that Fubini's theorem applies, we exchange the order of integration.
+\[= \frac{2}{\pi^2}\int_0^\infty F_n(\nu)\nu\sinh(\pi\nu) \left[ \int_0^\infty K_{i\nu}^{(n)}(x)K_{i\mu}^{(n)}(x)\frac{dx}{x} \right] d\nu\]Substitute the orthogonality relation 
+\[= \frac{2}{\pi^2}\int_0^\infty F_n(\nu)\nu\sinh(\pi\nu) \left[ \frac{\pi^2}{2\nu\sinh(\pi\nu)}\delta(\nu-\mu) \right] d\nu\]
+\[= \int_0^\infty F_n(\nu)\delta(\nu-\mu)d\nu = F_n(\mu)\]
+Because the transform of $g(x)$ is identical to the transform of $f(x)$, and assuming the family of kernels $K_{i\nu}^{(n)}(x)$ is complete over the weighted space( n=2 this is actually the case , But it's still an open problem for $n>2$), it follows that $g(x) = f(x)$ almost everywhere. This establishes the inversion formula invariantly for any order $n \ge 2$.
+\section{Recurrence Formula for $K^{(n)}_{\beta}(x)$}
+We start with integration by parts, let $u = e^{-x\NotDefinedcosh{n}{}(t)}$ do $\frac{d}{dt} u =-x\NotDefinedsinh{n}{}(t)e^{-x\NotDefinedcosh{n}{}(t)}$, let $\frac{d}{d v} = \cosh(\beta t)$ so $v = \frac{1}{\beta}\sinh(\beta t)$
+\[K^{(n)}_{\beta}(x) =\bigg[e^{-x\NotDefinedcosh{n}{}(t)}\frac{\sinh(\beta t)}{\beta}\bigg]^{\infty}_{0}-(-\frac{x}{\beta}\int_{0}^{\infty}\NotDefinedsinh{n}{}(t)e^{-x\NotDefinedcosh{n}{}(t)}\sinh(\beta t)dt )\]
+\[=\frac{x}{\beta}\int_{0}^{\infty}e^{-x\NotDefinedcosh{n}{}(t)}\NotDefinedsinh{n}{}(t)\sinh(\beta t)dt ) \]
+we use the definition of $\NotDefinedsinh{n}{}(t) = \frac{1}{n} \sum_{k=0}^{n-1} \omega^k e^{\omega^k t}$ and the euler form of $\sinh(\beta t) = \frac{e^{\beta t}-e^{-\beta t}}{2}$
+\[K^{(n)}_{\beta}(x)=\frac{x}{2\beta}\int_{0}^{\infty}e^{-x\NotDefinedcosh{n}{}(t)}\sum_{k=0}^{n-1} \omega^k \left[ e^{(\omega^k + \beta)t} - e^{(\omega^k - \beta)t} \right]dt \] 
+\[= \frac{x}{2\beta}\sum_{k=0}^{n-1} \omega^k  \int_{0}^{\infty}e^{-x\NotDefinedcosh{n}{}(t)}e^{(\omega^k + \beta)t}dt - \int_{0}^{\infty}e^{-x\NotDefinedcosh{n}{}(t)}e^{(\omega^k - \beta)t} dt \]
+if we expand $e^{(\omega^k + \beta)t}$ and $e^{(\omega^k - \beta)t}$ using hyperbolic functions we get two kernels, one of them is $K^{(n)}_{\beta+\omega^k}(x),K^{(n)}_{-\beta+\omega^k}(x)$ and the other uses $\sinh$ instead of $\cosh$, let's denote it with $^{S}K^{(n)}_{\beta+\omega^k}(x)$ and $^{S}K^{(n)}_{-\beta+\omega^k}(x)$\\
+Because $\cosh$ is an even function and $\sinh$ is an odd function, we know that:$K^{(n)}_{-\beta + \omega^k} = K^{(n)}_{\beta - \omega^k}$,$^{S}K^{(n)}_{-\beta+\omega^k}(x) = -^{S}K^{(n)}_{\beta-\omega^k}(x)$\\
+therefore
+\[ \frac{2n\beta}{x} K^{(n)}_{\beta}(x) = \sum_{k=0}^{n-1} \omega^k \bigg( \bigg[ K^{(n)}_{\beta + \omega^k}(x) - K^{(n)}_{\beta - \omega^k}(x) \bigg] + \bigg[{}^{S}K^{(n)}_{\beta+\omega^k}(x) + {}^{S}K^{(n)}_{-\beta+\omega^k}(x) \bigg] \bigg) \]
+when $n$ is even, we can group the sum by $\omega^k$ and $-\omega^k$ since the root, and its conjugate must appear, since the $K^{(n)}_{\beta+\omega^k}(x)$ function is even it won't have any problems, but for the other function $^{S}K^{(n)}_{\beta+\omega^k}(x)$ , it will cancel itself due to it being an odd function, we will be left out with $2 \times$ the sum of $K^{(n)}_{\beta+\omega^k}(x)$ functions, and dividing both sides we get
+\[ \frac{n\beta}{x} K^{(n)}_{\beta}(x) = \sum_{k=0}^{\frac{n}{2}-1} \omega^k \bigg( \bigg[ K^{(n)}_{\beta + \omega^k}(x) - K^{(n)}_{\beta - \omega^k}(x) \bigg]\bigg)\]
+which is the standard case when $n =2$ which means that $\omega = -1$ and $K_{\beta}(x) = K_{\beta}(x)$
+\[ \frac{2\beta}{x} K_{\beta}(x) = \sum_{k=0}^{\frac{2}{2}-1} (-1)^k \bigg( \bigg[ K_{\beta + (-1)^k}(x) - K_{\beta - (-1)^k}(x) \bigg]\bigg) =  K_{\beta + 1}(x) - K_{\beta - 1}(x)\]
+But this clean form doesn't hold for odd $n$
+\section{Parseval's identity for generalized Kontorovich–Lebedev transform}
+from the orthogonality, we can follow\\
+Let $F_n(\nu)$ and $H_n(\nu)$ be the generalized KL transforms of $f(x)$ and $h(x)$ respectively
+\[\int_0^\infty f(x)h(x)\frac{dx}{x} = \int_0^\infty f(x) \left[ \frac{2}{\pi^2}\int_0^\infty H_n(\nu)\nu\sinh(\pi\nu)K_{i\nu}^{(n)}(x)d\nu \right] \frac{dx}{x}\]
+Swap the integrals:
+\[= \frac{2}{\pi^2}\int_0^\infty H_n(\nu)\nu\sinh(\pi\nu) \left[ \int_0^\infty f(x)K_{i\nu}^{(n)}(x)\frac{dx}{x} \right] d\nu\]
+\[\int_0^\infty f(x)h(x)\frac{dx}{x} = \frac{2}{\pi^2}\int_0^\infty F_n(\nu)H_n(\nu)\nu\sinh(\pi\nu)d\nu\]
+therefore
+\[\int_0^\infty f(x)^2\frac{dx}{x} = \frac{2}{\pi^2}\int_0^\infty F_n(\nu)^2 \nu\sinh(\pi\nu)d\nu\]
+\section{Functional Framework and Convergence Requirements}
+define the underlying functional spaces for the test functions $f(x)$. Let $L_2((0, \infty); x^{-1}dx)$ denote the weighted Lebesgue space of square-integrable functions under the invariant measure $dx/x$, equipped with the norm
+\begin{equation}
+\|f\| = \left( \int_0^\infty |f(x)|^2 \frac{dx}{x} \right)^{1/2} < \infty
+\end{equation}
+For pointwise and absolute convergence of the transform integral, the behavior of the kernel $K_{i\mu}^{(n)}(x)$ necessitates that $f(x)$ satisfies the following structural bounds:
+\begin{enumerate}
+    \item \textbf{Local condition at the origin:} $f(x) = \mathcal{O}(x^\alpha)$ as $x \to 0^+$ for some $\alpha > 0$, ensuring integrability against the logarithmic singularity of the kernel and the $x^{-1}$ weight.
+    \item \textbf{Growth condition at infinity:} $f(x) = \mathcal{O}(e^{cx})$ as $x \to \infty$ for some $c < 1$, which is strictly dominated by the asymptotic decay of the generalized kernel, $K_{i\mu}^{(n)}(x) \sim \mathcal{O}(e^{-x} x^{-1/n})$.
+\end{enumerate}
+\section{Table of some transformed functions}
+Small Table for specific transformed functions
+\begin{table}[htbp]
+\centering
+\label{tab:kl_pairs}
+
+\begin{tabularx}{\textwidth}{ >{\centering\arraybackslash}X >{\centering\arraybackslash}X }
+\toprule
+\textbf{Object Function } $f(x)$ & \textbf{Generalized Transform } $F_n(\nu)$ \\ 
+\midrule
+$x_0 \delta(x - x_0), \quad x_0 > 0$ & $K_{i\nu}^{(n)}(x_0)$ \\ 
+\addlinespace
+$x e^{-ax}, \quad a \ge 0$ & $\displaystyle\int_0^\infty \frac{\cos(\nu t)}{a + \cosh_n(t)} \, dt$ \\ 
+\addlinespace
+$x^\alpha, \quad \alpha > 0$ & $\displaystyle\Gamma(\alpha) \int_0^\infty \cos(\nu t) \left[\sech_n(t)\right]^\alpha \, dt$ \\ 
+\bottomrule
+\end{tabularx}
+\end{table}
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}
