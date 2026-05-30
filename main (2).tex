@@ -1,0 +1,324 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\newtheorem{Theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+% operators declaration
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\Ti}{Ti}
+\DeclareMathOperator{\Li}{Li}
+% Original Functions
+\newcommand{\NotDefinedsinh}[2]{\operatorname{\sinh_{#1}\text{#2}}}
+\newcommand{\NotDefinedcsch}[2]{\operatorname{\csch_{#1}\text{#2}}}
+\newcommand{\NotDefinedcosh}[2]{\operatorname{cosh}_{#1}\text{#2}}
+\newcommand{\NotDefinedDirchletcosh}[2]{\operatorname{cosh}^{\chi}_{#1}\text{#2}}
+\newcommand{\NotDefinedDirchletsech}[2]{\operatorname{\sech^{\chi}_{#1}\text{#2}}}
+\newcommand{\NotDefinedtanh}[2]{\operatorname{\tanh_{#1}\text{#2}}}
+\newcommand{\NotDefinedsech}[2]{\operatorname{\sech_{#1}\text{#2}}}
+\newcommand{\NotDefinedcoth}[2]{\operatorname{\coth_{#1}\text{#2}}}
+%Reduced Functions
+\newcommand{\NotDefinedsin}[2]{\operatorname{\sin_{#1}\text{#2}}}
+\newcommand{\NotDefinedcos}[2]{\operatorname{\cos_{#1}\text{#2}}}
+\newcommand{\Notrootcos}[1]{\operatorname{\cos^{#1}}}
+\newcommand{\Notrootsin}[1]{\operatorname{\sin^{#1}}}
+\newcommand{\NotDefinedtan}[2]{\operatorname{\tan_{#1}\text{#2}}}
+\newcommand{\NotDefinedsec}[2]{\operatorname{\sec_{#1}\text{#2}}}
+\newcommand{\NotDefinedcsc}[2]{\operatorname{\csc_{#1}\text{#2}}}
+\newcommand{\NotDefinedcot}[2]{\operatorname{\cot_{#1}\text{#2}}}
+\newcommand{\NotFixedsinh}[1]{\operatorname{_{#1}\sinh}}
+\newcommand{\NotFixedcosh}[1]{\operatorname{_{#1}\cosh}}
+
+\title{A generalization for the Dirichlet beta function using generalized hyperbolic functions}
+\author{Faisal Khalid}
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+We introduce a family of generalized Dirichlet beta functions $\beta_\alpha(s)$ defined for Re$(\alpha) > 0$
+and Re$(s) > 0$ via the normalized Mellin transform of the generalized hyperbolic secant.\\
+This construction recovers the classical Dirichlet beta function at $\alpha = 2$, and produces a family of Barnes-type weighted zeta objects over $\mathbb{Z}[\zeta_n]$ for integer $n>2$.\\
+We define an associated family of generalized Euler numbers $E^{(\alpha)}_{\alpha n}$ through the power series of $\NotDefinedsech{\alpha}{}(x)$, establishing for integer order $j$ the congruences $E^{(j)}_{jn} \equiv (-1)^n \pmod{j}$ and, for prime $j$, $E^{(j)}_{jn} \equiv (-1)^n \pmod{j^2}$.\\
+Applying Ramanujan's Master Theorem — after verifying Hardy's exponential growth condition via the theory of entire functions of exponential type — we derive the identity $\beta_n(-mn) = \frac{(-1)^{mn}}{n} E^{(n)}_{mn}$ and characterize the trivial zeros of $\beta_\alpha$.\\
+Our principal result is an analytic continuation of the generalized Euler numbers to all $s \in \mathbb{C}$:
+
+As corollaries, we express even values of $\beta_\alpha$ in terms of analytically continued Euler numbers and recover Catalan's constant as $G= \frac{E_{-2}}{2}$.
+\end{abstract}
+\section{Introduction}
+The classical Dirichlet beta function is fundamentally linked to the hyperbolic secant via its regularized Mellin transform. In this paper, we generalize this framework by substituting the classical kernel with $\NotDefinedsech{\alpha}{}(x) = \frac{1}{E_\alpha(x^\alpha)}$, where $E_\alpha$ is the Mittag-Leffler function. This construction unifies canonical $L$-functions with weighted zeta objects over algebraic fields and generates a new class of generalized Euler numbers. By leveraging the Paley-Wiener theorem to verify Hardy's growth condition, we rigorously establish the analytic continuation of these objects to all $s \in \mathbb{C}$, resolving their singular behaviors in a single, unified framework.
+
+\section{Prerequisite}
+Define Generalized $\cosh(x)$ as the "main cyclic function" of the $n$-th order as\cite{Ungar1982}: 
+\[\NotDefinedcosh{n}{}(x):=\sum_{k=0}^\infty \frac{x^{nk}}{(nk)!}=\frac{1}{n}\sum_{m=0}^{n-1}e^{\omega^m x}, 
+\quad \{x\in \mathbb{R},n\in\mathbb{N},\omega = e^{\frac{2\pi i}{n}}\}\]
+Which is positive for all real valued $x$ in $e^{\omega x}$\\
+and for general $\alpha \in \mathbb{C}$ \[\NotDefinedcosh{\alpha}{}(x)=\sum_{k=0}^\infty \frac{x^{\alpha k}}{\Gamma(\alpha k+1)} =E_{\alpha}(x^{\alpha}) \]
+where $E_{\alpha}(x^{\alpha})$ is the Mittag-Leffler function \cite{Gorenflo2014}\\
+Define Euler numbers as \cite{RoaGonzalez2025} 
+\[E_{n} =-\sum_{k=0}^{n-1}\binom{2n}{2k} E_{k}\]
+Define the Dirichlet beta function as \cite{AbramowitzStegun1964:Beta} 
+\[\beta(s) = \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)^s}\]
+\section{Euler numbers to the Naturals}
+Using the same method, we can generalize the families of Euler numbers to the Natural numbers
+\begin{Theorem}
+    let $j \in \mathbb{N}$, therefore:
+    \[E^{(j)}_{jn} =-\sum_{k=1}^{n}\binom{jn}{jk} E^{(j)}_{j(n-k)}\]
+\end{Theorem} 
+\begin{proof}
+\[\NotDefinedcosh{j}{}(x) \times \frac{1}{\NotDefinedcosh{j}{}(x)} = \sum_{n=0}^{\infty} \frac{x^{jn}}{(jn)!}\times \sum_{k=0}^{\infty}\frac{E^{(j)}_{jk}}{(jk)!}x^{jk} = 1\]
+Let $k=jl,jn-k = jn-jl$
+\[\sum_{l=0}^{n}\frac{1}{(jl)!}\frac{E^{(j)}_{j(n-l)}}{(jn-jl)!}\]
+The sum equal zero whenever $n \ge 1$ ,
+\[\sum_{l=0}^{n}\frac{(jn)! E^{(j)}_{j(n-l)}}{(jl)!(jn-jl)!}=\sum_{l=0}^{n} \binom{jn}{jl}E^{(j)}_{j(n-l)} = 0\]
+Get the $E^{(3)}_{3n}$ we take the first term 
+\[-E^{(j)}_{jn} = \sum_{l=1}^{n} \binom{jn}{jl}E^{(j)}_{j(n-l)} \implies E^{(j)}_{jn} = -\sum_{l=1}^{n} \binom{jn}{jl}E^{(j)}_{j(n-l)}\]
+\textbf{Q.E.D}
+\end{proof}
+
+Some general properties of this family are
+\[ E^{(j)}_0 = 1 \qquad \qquad E^{(j)}_j = -1\]
+The second one can be proved easily 
+\[E^{(j)}_j = -\sum_{l=1}^{1} \binom{j}{jl}E^{(j)}_{j(1-l)} = -\binom{j}{j}E^{(j)}_{0}  = - 1\]
+For a non-positive integer $j$, this definition will yield a factorial of less than $0$, which makes the full sequence zeros\\
+for $E^{(1)}$ ,we get the sequence $(1,-1,1,-1,....)$ there will only be flip sgn because there is no growth , which is true from the cyclic side, the first cyclic $\cosh(x)$ function is $e^x$ and the Euler numbers for it are supposed to be $\frac{1}{e^x} = e^{-x}$ which has these alternating signs
+%proof for the last one
+\section{some properties of generalized Euler numbers}
+\begin{Theorem}
+Let $j \in \mathbb{N}$ and $n \in \mathbb{N}$. Then \[E^{(j)}_{jn} \equiv (-1)^n \pmod{j}\]
+\end{Theorem} 
+\begin{corollary}
+\[E^{(j)}_{jn} \equiv
+\begin{cases}
+1 \pmod{j}, & \text{if } n \text{ is even},\\
+j-1 \pmod{j}, & \text{if } n \text{ is odd}.
+\end{cases}\]
+Moreover,
+\[|E^{(j)}_{jn}| \equiv 1 \pmod{j},
+\qquad E^{(j)}_{jn} \equiv (-1)^n \pmod{j}.\]
+\end{corollary}
+In particular, the congruence class of $E^{(j)}_{jn}$ depends only on the parity of 
+$j$, while its sign is governed by $n$
+\begin{proof}
+Base case when n = 0 $E^{(j)}_{0} = 1 \equiv 1 \pmod{j}$ \\
+when n = 1 $E^{(j)}_{j} = -1 \equiv j-1 \pmod{j}$\\
+\[E^{(j)}_{jn} = -\sum_{l=1}^{n} \binom{jn}{jl}E^{(j)}_{j(n-l)} =  -(\sum_{l=1}^{n-1} \binom{jn}{jl}E^{(j)}_{j(n-l)} + \binom{jn}{jn}E^{(j)}_{0})\]
+We use the divisibility Lemma for binomial coefficients ,which states that "For any integers 
+$j,n$ and $1\leq l\leq n-1,j | \binom{jn}{jl}$, 
+\[E^{(j)}_{jn} \equiv -(\sum_{l=1}^{n-1} \binom{jn}{jl}E^{(j)}_{j(n-l)} +1) \pmod{j}\]
+The binomial term vanishes and we are left with $E^{(j)}_{jn} \equiv -1 \pmod{j}$
+iterating the expression ,we get
+\[E^{(j)}_{jn} \equiv (-1)^n \pmod{j} \]
+
+%\[E^{(j)}_{jn} \equiv -(-(-1)^n) = (-1)^n \pmod{j} \]
+\textbf{Q.E.D}
+\end{proof}
+\begin{Theorem}
+Let $j$ be a prime number and $n \in \mathbb{N}$. Then \[E^{(j)}_{jn} \equiv (-1)^n \pmod{j^2}\]
+\end{Theorem} 
+\begin{corollary}
+\[E^{(j)}_{jn} \equiv
+\begin{cases}
+1 \pmod{j^2}, & \text{if } n \text{ is even},\\
+j-1 \pmod{j^2}, & \text{if } n \text{ is odd}.
+\end{cases}\]
+Moreover,
+\[|E^{(j)}_{jn}| \equiv 1 \pmod{j^2},
+\qquad E^{(j)}_{jn} \equiv (-1)^n \pmod{j^2}.\]
+\end{corollary}
+\begin{proof}
+let $j$ be a prime number , we write $\binom{jn}{jl}=j\times C$ where $C \not \equiv 0 \pmod j$ and assume that $E_{jk}^{(j)}\equiv (-1)^{k} \pmod {j^2}$ for all \(k<n\). We use the recurrence relation:\\
+\[E^{(j)}_{jn} \equiv -(\sum_{l=1}^{n-1} j CE^{(j)}_{j(n-l)} +1) = -1+ -j\sum_{l=1}^{n-1} CE^{(j)}_{j(n-l)}\pmod{j^2}\]
+it follows from Lucas theorem that $\frac{1}{j}\binom{jn}{jl} \equiv \binom{n}{l} \pmod{j}$ only when $j$ is prime so $C \equiv \binom{n}{l} \pmod{j}$\\
+substituting it back 
+\[E^{(j)}_{jn} \equiv -1+ -j\sum_{l=1}^{n-1} \binom{n}{l}(-1)^{n-1}\pmod{j^2}\] 
+The binomial coefficient is similar to the expansion of the infinite sum $(1-1)^n$ ,which equals $0$ ,so
+\[\sum_{l=1}^{n-1} \binom{n}{l}(-1)^{n-l} = -((-1)^n + 1)\]
+this means the $j\times sum \equiv 0 \pmod{j^2}$
+which leaves us with 
+\[E^{(j)}_{jn} \equiv (-1)^n \pmod{j^2}\]
+\textbf{Q.E.D}
+\end{proof}
+
+\begin{corollary}
+    $\forall j\in \mathbb{N},E^{(j)}_{jn}\in \mathbb{Q}$ 
+\end{corollary}
+
+\section{Euler numbers to the Reals}
+The same steps can be done to define fractional Euler numbers of order $\alpha$
+\[E^{(\alpha)}_{\alpha n}=  -\sum_{l=1}^{n} \binom{\alpha n}{\alpha l}E^{(\alpha)}_{\alpha(n-l)} = -\sum^{n}_{l=1} \frac{\Gamma
+(\alpha n +1)}{\Gamma(\alpha l + 1)\Gamma(\alpha l - \alpha n + 1)} E^{(\alpha)}_{\alpha (n-l)}\]
+and
+This formula of course, is undefined when $\alpha\in\{-1,-2,-3,...\}$, and hold the same rules as above stated\\
+Here is a table of some families up to the first 8 numbers
+\[E^{(1)}_n = (1,-1,1,-1,...) \qquad \qquad E^{(2)}_{2n} = (1,-1,5,-61,1385,-50521,2702765,-199360981,...)\]
+\[E^{(3)}_{3n} = (1,-1,19,-1513,315523,-136085041,105261234643,-132705221399353,...)\]
+\[ E^{(4)}_{4n} = (1,-1,69,-33661,60376809,-288294050521,3019098162602349,-60921822444067346581,...)\]
+\[E^{(\frac{1}{2})}_{\frac{n}{2}}=(1,-1,0.273240,0.090141,-0.001854,-0.029974,-0.021965,-0.002133,...)\]
+\[E^{(\phi)}_{\phi n} = (1,-1,2.872743,-15.892598,142.444242,-1859.545244,32961.766633,-755701.569224,...)\]
+\[E^{(\sqrt2)}_{\sqrt2 n} = (1,-1,2.089804,-7.229012,37.203213,-263.767443,2435.112228,-28098.496042,...)\]
+\[E^{(e)}_{en}= (1,-1,13.157416,-625.397670,70748.065081,-15416423.6838,5692675454.80,-3.268403 \times 10^{12},...)\]
+\[E^{(\pi)}_{\pi n} = (1,-1,22.826938,-2352.307530,666058.126485,-404238432.81,4.527044 \times 10^{11},-8.461452 \times 10^{14},...)\]
+Take for example 
+\[E^{(\frac{1}{2})}_{\frac{n}{2}} = -\sum^{n}_{l=1} \frac{\Gamma (\frac{n}{2}+1)}{\Gamma(\frac{l}{2} + 1)\Gamma(\frac{l-n}{2} + 1)} E^{(\alpha)}_{\frac{(n-l)}{2}}\]
+When $l-n $ is even ,the term vanishes\\
+when $n$ is odd only $l$ is even or $l=n$ the terms survive and so $\Gamma (\frac{n}{2}+1)=A\sqrt\pi,\Gamma (\frac{l}{2}+1)=B,\Gamma (\frac{l-n}{2}+1)=C\sqrt\pi$ where $A,B,C\in \mathbb{Q}$ therefore $E^{(\frac{1}{2})}_{\frac{n}{2}}\in\mathbb{Q}$\\
+when $n$ is even only $l$ is odd $l=n$ the terms survive and so $\Gamma (\frac{n}{2}+1)=A,\Gamma (\frac{l}{2}+1)=B\sqrt\pi,\Gamma (\frac{l-n}{2}+1)=C$ where $A,B,C\in \mathbb{Q}$ therefore $E^{(\frac{1}{2})}_{\frac{n}{2}}\in\mathbb{T}$\\
+%make it bigger if possible
+%this formula is a finite sum whenever $n\in\mathbb{Z^+}$ and infinte sum otherwise the sum divergece
+%add convergence test here
+\section{Euler numbers to the Complex}
+$E^{i}_{in}$ can be defined the same way using $\frac{1}{\NotDefinedcosh{i}{}(x)}$
+%continue later
+\[E^{(i)}_{in} = (1,-1,-0.579+0.38i,-0.56+0.672i,-0.649+1.009i,-0.912+1.396i,-1.457+1.743i,-2.349+1.822i,...)\]
+They form a spiral shape starting $-1$ at Re-Im plot. We can rewrite the sum as (magnitude, angle) pairs\\
+\[E^{(i)}_{in} = \big((1,0),(1,3.141),(0.693,2.561),(0.875,2.266),(1.2,2.142),(1.668,2.150),(2.272,2.267),(2.973,2.482),....\big)\]
+it grows at rate of an exponential rate\\
+There is also this fascinating property of these numbers 
+$\overline{E^{(\alpha+i\beta)}_{(\alpha+i\beta)n}} = E^{\overline{(\alpha+i\beta)}}_{\overline{(\alpha+i\beta)}n} $
+\[\overline{E^{(\alpha+i\beta)}_{(\alpha+i\beta)n}} = -\sum^{n}_{l=1} \frac{\overline{\Gamma ((\alpha+i\beta)n +1)}}{\overline{\Gamma((\alpha+i\beta) l + 1)}\overline{\Gamma((\alpha+i\beta)(l - n) + 1)}} \overline{E^{(\alpha+i\beta)}_{(\alpha+i\beta) (n-l)}}\]
+since $\overline{\Gamma(z)} = \Gamma(\overline{z})$
+\[\overline{E^{(\alpha+i\beta)}_{(\alpha+i\beta)n}} = -\sum^{n}_{l=1} \frac{\Gamma(\overline{( \alpha+i\beta)n +1})}{\Gamma(\overline{(\alpha+i\beta) l + 1})\Gamma(\overline{(\alpha+i\beta)(l - n) + 1})} \overline{E^{(\alpha+i\beta)}_{(\alpha+i\beta) (n-l)}}\]
+and by the same standard $\overline{E^{(\alpha+i\beta)}_{(\alpha+i\beta) (n-l)}} = {E^{\overline{(\alpha+i\beta)}}_{\overline{(\alpha+i\beta) (n-l)}}}$ up to $E_0^{(\alpha+i\beta )}$ which is equal to it's conjugate
+\section{A closed form for $\NotDefinedsech{n}{}(x)$ with multinational coefficients}
+We expand the sum and define $\NotDefinedsech{n}{}$ as $\frac{1}{\NotDefinedcosh{n}{}(x)}$ 
+\[\NotDefinedsech{\alpha}{} =\frac{1}{\sum_{k=0}^{\infty}{\frac{x^{kn}}{(kn)!}}}\]
+We use generalized Euler numbers for any $k\alpha$
+\[\NotDefinedsech{\alpha}{} = \sum_{k=0}^{\infty}{\frac{E^{(\alpha)}_{k\alpha}x^{k\alpha}}{(k\alpha)!}} \qquad \{\alpha\in\mathbb{C}-\{0,-1,-2,...\}\}\]
+using the Euler form for $\NotDefinedcosh{n}{}(x) = \frac{\sum_{k=0}^{n-1}e^{\omega^kx}}{n}$ we let 
+\[\NotDefinedsech{n}{}(x) = \frac{n}{\sum_{k=0}^{n-1}e^{\omega^kx}}\]
+Where $n\in \mathbb{N}$ and $\omega^n=1$\\
+Since $e^{\omega^0 x} = e^x$ we multiply by $\frac{e^{-x}}{e^{-x}}$ to get this infinite sum
+\[\NotDefinedsech{n}{}(x) = \frac{ne^{-x}}{1+\sum_{k=1}^{n-1}e^{(\omega^k-1)x}} = ne^{-x}\sum_{m=0}^{\infty}(-1)^m\bigg(\sum_{k=1}^{n-1}e^{(\omega^k-1) x}\bigg)^m\]
+We let $A(x) = \big(\sum_{k=1}^{n-1}e^{(\omega^k-1) x}\big)$ to get this expression
+\[\NotDefinedsech{n}{}(x)=ne^{-x}\sum_{m=0}^{\infty}(-1)^mA(x)^m\]
+However, we hit a boundary problem.\\
+Around the origin, $A(0) = \sum_{k=1}^{n-1} 1 = n-1$. This means that for $n > 2$, there exists a region where $|A(x)| > 1$. \\
+Consequently, the geometric series expansion does not converge in the interval $[0, x_0]$, where $x_0$ is defined as the unique positive root of the equation $A(x_0) = 1$. \\
+Beyond this point, for $x \ge x_0$, the condition $|A(x)| < 1$ holds. \\
+To rigorously evaluate the integral across the entire domain, we must split it at $x_0$ and utilize the Taylor series definition of $\NotDefinedsech{n}{}(x)$ for the interval $[0, x_0]$\\
+Continuing outside this interval, the expansion for $A(x)^m$ equals
+\[\big(\sum_{k=1}^{n-1}e^{(\omega^k-1) x}\big)^m = \sum_{k_1+k_2+...+k_{n-1} = m} \frac{m!}{k_1! k_2! ... k_{n-1}!} \prod_{j=1}^{n-1} (e^{(\omega^j-1) x})^{k_j}\]
+We multiply the powers inside the finite product term $\prod_{j=1}^{n-1} (e^{(\omega^j-1) x})^{k_j} =\prod_{j=1}^{n-1} (e^{(\omega^j-1) xk_j})=e^{x\sum_{j=1}^{{n-1}}{k_j(\omega^j-1)}} $ and including the $e^{-x}$ factor inside we get $e^{-x}e^{x\sum_{j=1}^{{n-1}}{k_j(\omega^j-1)}} = e^{-x+x\sum_{j=1}^{{n-1}}{k_j\omega^j-k_j}}=e^{(-x+x\sum_{j=1}^{n-1}k_j\omega^j - x\sum_{j=1}^{n-1}k_j)}$\\
+we know that $m=\sum_{j=1}^{n-1}k_j$ so the final shape of the exponent is $e^{-x(1+m-\sum_{j=1}^{n-1}k_j\omega^j)}$
+\[\NotDefinedsech{n}{}(x) = n\sum_{k_1+k_2+...+k_{n-1} = m} (-1)^m\frac{m!}{k_1! k_2! ... k_{n-1}!} e^{-x(1+m-\sum_{j=1}^{n-1}k_j\omega^j)}\]
+\section{Generalized Dirichlet beta function}
+The Dirichlet beta function is defined as $\beta(s) = \sum_{n=0}^{\infty}{\frac{(-1)^n}{(2n+1)^s}}$, which is for the alternating Dirichlet character of period 4 has the integral representation
+\[\beta(s) = \frac{1}{\Gamma(s)}\int_{0}^{\infty}\frac{x^{s-1}e^{-x}}{1+e^{-2x}}dx = \frac{1}{2\Gamma(s)}\int_{0}^{\infty}\frac{x^{s-1}}{\cosh(x)}dx \qquad \text{Re}(s)>0\]
+We can see that the beta function is a Mellin transform of $\sech(x)$ normalized by a factor of $\frac{1}{2\Gamma(s)}$\\
+Motivated by this structure, we define a generalized beta function associated with $\NotDefinedsech{n}{}(x)$ by
+\[\beta_n (s) := \frac{1}{n\Gamma(s)}\mathcal{M}\{\NotDefinedsech{n}{}\}(s) \qquad \text{Re}(s)>0\]
+for $n=1,2$ we get
+\[\beta_1(s)=\frac{1}{\Gamma(s)}\mathcal{M}{\{\frac{1}{e^x}\}} (s)= \frac{1}{\Gamma(s)}\Gamma(s) = 1 \qquad \qquad \beta_2(s) = \beta(s)\]
+and For $n=2$ we have the classical Dirichlet  $\beta(s)$ function, how ever for $n>2$ the $\NotDefinedsech{n}{}(x)$ doesn't converge between the interval $[0,x_0]$ as stated above\\
+Instead, let's split the integral and use the series definition of $\NotDefinedsech{n}{}(x)$ \\
+Let $I_1(s) = n\int_{0}^{x_0}\sum_{m=0}^{\infty}\frac{E^{(n)}_{mn}x^{s-1+nm}}{(nm)!} dx = n \sum_{m=0}^{\infty} \frac{E^{(n)}_{mn}}{(mn)!} \frac{x_0^{s+mn}}{s+mn}$ (which has poles at $s=0,-1,-2$ etc) and 
+$I_2(s) = n\int_{x_0}^{\infty} x^{s-1}\sum_{k_1+k_2+...+k_{n-1} = m} (-1)^m\frac{m!}{k_1! k_2! ... k_{n-1}!} e^{-x(1+m-\sum_{j=1}^{n-1}k_j\omega^j)}dx$, let $\lambda = 1+m-\sum_{j=1}^{n-1}k_j\omega^j$ then $I_2 = n \sum_{k_1+...+k_{n-1} = m}(-1)^m \frac{m!}{k_1! ... k_{n-1}!}\frac{\Gamma(s,\lambda x_0)}{\lambda^s}$ where $\Gamma(a,b)$ is the upper incomplete gamma function \\
+With this, one can possess another formula for calculations for $n\in\mathbb{N}$ 
+\[\beta_n(s)=\frac{1}{n\Gamma(s)}n \bigg[ \sum_{m=0}^{\infty} \frac{E^{(n)}_{mn}}{(mn)!} \frac{x_0^{s+mn}}{s+mn}+\sum_{k_1+...+k_{n-1} = m}(-1)^m \frac{m!}{k_1! ... k_{n-1}!}\frac{\Gamma(s,\lambda x_0)}{\lambda^s}\bigg]\] 
+\[=\frac{1}{\Gamma(s)} \bigg[ \sum_{m=0}^{\infty} \frac{E^{(n)}_{mn}}{(mn)!} \frac{x_0^{s+mn}}{s+mn}+\sum_{k_1+...+k_{n-1} = m}(-1)^m \binom{m!}{k_1! ... k_{n-1}!}\Gamma(s,\lambda x_0)\lambda^{-s}\bigg] \]
+where $\lambda = 1+m-\sum_{j=1}^{n-1}k_j\omega^j$ \\
+we solve for $n = 2$ which in this case $\omega = -1$
+\[\beta_2 (s) = \frac{1}{\Gamma(s)} \bigg[ \sum_{m=0}^{\infty} \frac{E^{(n)}_{mn}}{(mn)!} \frac{0}{s+mn}+\sum_{k_1 = m}(-1)^m \binom{m!}{k_1!}\Gamma(s,0)\lambda^{-s}\bigg] = \sum_{n=0}^{\infty}\frac{(-1)^m}{(2n+1)^s}\]
+we get back the original $\beta(s)$ series definition, and for the case $n=1$ there is no sum which leads to $\beta_1(s) = 1$\\
+These objects are out of the definition of the Dirichlet $L$ series as they don't possess the form of $\sum \frac{a_n}{n^s}$, but they are closer to the Barnes zeta function type that takes the form $\zeta(s,w|a_1,...,a_N) = \sum_{a_1,...,a_N\geq 0}\frac{1}{(w+n_1a_!+...+n_Na_N)^s}$\\
+They can be defined as "Weighted Zeta objects With connection to $\mathbb{Z}[\omega]$ and have the Dirichlet beta function in the case of $\beta_2(s)$"
+%continue here 
+\section{Convergence of $\beta_n(s)$}
+To evaluate its convergence, we split the integral $I_n(s) = \int_0^\infty x^{s-1} sech_n(x) \, dx$ into two domains:
+\[I_n(s) = \int_0^1 x^{s-1} sech_n(x) \, dx + \int_1^\infty x^{s-1} sech_n(x) \, dx\]
+For the zero case ($x \to 0^+$) From the power series expansion\\
+$\NotDefinedsech{n}{}(x)= \frac{1}{1 + \frac{x^n}{n!} + \frac{x^{2n}}{(2n)!} +...}$  $x \to 0^+$, all higher-order polynomial terms vanish, returning $\lim_{x \to 0^+} sech_n(x) = 1$\\
+Therefore, the local behavior of the integrand near zero is dominated by the power term $x^{s-1} \NotDefinedsech{n}{}(x) \sim x^{s-1}$ as $ x \to 0^+$ . The improper integral $\int_0^1 x^{s-1} \, dx$ converges if and only if the real part of the exponent is greater than $-1$. \\
+Thus, we establish the fundamental requirement is Re$(s)> 0$\\
+For the Asymptotic Behavior at Infinity ($x \to \infty$)Using roots-of-unity formula
+\[\NotDefinedsech{n}{}(x) = \frac{n}{\sum_{k=0}^{n-1} e^{\omega^k x}}\]
+where $\omega = e^{2\pi i / n}$. Extracting the principal $k=0$ term ($\omega^0 = 1$) from the denominator
+\[\sum_{k=0}^{n-1} e^{\omega^k x} = e^x + \sum_{k=1}^{n-1} e^{x \cos(2\pi k / n)} e^{i x \sin(2\pi k / n)}\]
+For all $1 \le k \le n-1$, the real component satisfies $\cos(2\pi k / n) < 1$. Consequently, as $x \to \infty$, the $e^x$ term exponentially dominates the entire sum.\\
+This gives us the asymptotic limit $\NotDefinedsech{n}{}(x) \sim n e^{-x} \quad \text{as } x \to \infty$\\
+Plugging this back into our upper-bound integral:
+\[\int_1^\infty x^{s-1} sech_n(x) \, dx \sim n \int_1^\infty x^{s-1} e^{-x} \, dx\]
+Because exponential decay overpowers any polynomial growth $x^{s-1}$, this integral converges absolutely for all $s \in \mathbb{C}$.\\
+Combining both boundaries and the $\frac{1}{n\Gamma(s)}$ factor, $\beta_n(s)$converges absolutely and uniformly in the half-plane Re$(s) > 0$, establishing a well-defined holomorphic function in this domain.
+\section{Connection to Euler numbers}
+Considering that in the $\NotDefinedsech{n}{}(x)$ the Euler numbers work as a function of $mn$, we can use Ramanujan's master Theorem \cite{Amdeberhanetal2012}to get a formula for values of the Mellin transform of $\NotDefinedsech{n}{}(x)$
+\[\NotDefinedsech{n}{}(x) = \sum_{m=0}^{\infty}\frac{E^{(n)}_{mn}}{(mn)!}x^{nm} = \sum_{k=0}^{\infty}\frac{\varphi(k)}{k!}(-x)^{k}\]
+We need to define $\varphi(k)$ to return a value if $k=mn$, or 0 otherwise (which is how Generalized Euler numbers work)\\
+so
+\[\frac{\varphi(mn)}{(mn)!}(-1)^{mn} =\frac{E^{(n)}_{mn}}{(mn)!} \implies \varphi(mn) = (-1)^{mn}E^{(n)}_{mn} \]
+therefore
+\[\mathcal{M}\{\NotDefinedsech{n}{}\}(s) = \Gamma(s)\varphi(-s)= n\Gamma(s)\beta_n(s)\]
+which implies that
+\[\beta_n(s) = \frac{\varphi(-s)}{n}\]
+letting $s=-mn$
+\[\beta_n(-mn) = \frac{\varphi(mn)}{n}=\frac{(-1)^{mn}E^{(n)}_{mn}}{n}\]
+therefore
+\[\beta_n(0) =\frac{1}{n}\]
+and when $r\in \mathbb{Z},r<mn,r\not\equiv0 \bmod(n)$ we have a trivial zero
+\[\beta_n(-mn+r) = 0\]          
+and all of $\beta_n(-mn),\beta_n(-mn+r)$ are all Algebraic Numbers
+
+\section{Generalization to $\mathbb{R},\mathbb{C}$}
+One thing we know about cyclic functions is that they can be extended to any order $\alpha\in\mathbb{C}$, but the Euler summation form only works for Natural order, in which we will use the series definition to make this analytic continuation possible \\
+for $\NotDefinedsech{\alpha}{}(x)$ the series representation is 
+\[\NotDefinedsech{\alpha}{}(x) = \sum_{n=0}^{\infty}E^{(\alpha)}_{\alpha n}\frac{x^{\alpha n}}{\Gamma(\alpha n+1)}\] where $E^{(\alpha)}_{\alpha n}$ are the generalized Euler numbers of order $\alpha$\\
+therefore
+\[\beta_\alpha(s) = \frac{1}{\alpha\Gamma(s)}\int_{\mathbb{R}_+^{2}}x^{s-1}\exp\big(-u\NotDefinedcosh{\alpha}(x){}\big)dudx \]
+This works only when $\NotDefinedcosh{\alpha}{}(x)>0$ , which is always true since we are integrating on the real side of the plane.\\
+And like $\beta_n(s)$, this function uses the same utility to determine its convergence\\
+Since $\NotDefinedsech{\alpha}{}(x) = \frac{1}{\NotDefinedcosh{\alpha}(x)}=\frac{1}{E_\alpha(x^{\alpha})} = \frac{1}{\sum_{m=0}^\infty \frac{x^{\alpha m}}{\Gamma(\alpha m + 1)}}$ ,Then near the Origin ($x \to 0^+$) the series returns $\NotDefinedcosh{\alpha}{}(x) = 1 + \frac{x^\alpha}{\Gamma(\alpha+1)} + \dots \to 1 \quad \text{as } x \to 0^+$ Just as in the natural-order case, $x^{s-1} sech_\alpha(x) \sim x^{s-1}$ when $x \to 0^+$. This preserves the strict domain constraint:Re$(s) > 0$\\
+At Infinity ($x \to \infty$)The asymptotic expansion of  $E_\alpha(z)$ for large $|z|$ For Re$(\alpha) > 0$ along the positive real axis ($\arg(z) = 0$) is $E_\alpha(x^\alpha) \sim \frac{1}{\alpha} e^x $ \cite{Gorenflo2014} as $x \to \infty$\\
+Taking the reciprocal we get $sech_\alpha(x) \sim \alpha e^{-x}$ as$ x \to \infty$ \\
+As long as $cosh_\alpha(x) \neq 0$ on the positive real line (which is true for all we know), the integral part transforms to
+\[\int_1^\infty x^{s-1} sech_\alpha(x) \, dx \sim \alpha \int_1^\infty x^{s-1} e^{-x} \, dx\]
+Which means absolute convergence for all $s \in \mathbb{C}$ under the condition that Re$(\alpha) > 0$.
+\section{Generalizing the connection to Euler numbers}
+we know that $\NotDefinedsech{\alpha}{}(x)=\sum_{n=0}^{\infty}\frac{x^{\alpha n}E^{(\alpha)}_{\alpha n}}{\Gamma(\alpha n+1)}$\\
+to use Ramanujan master theorem we need to $x^n$ where $n$ is an integer , so we make a substitution of $u=x^{\alpha},x=u^{\frac{1}{\alpha}}$, therefore
+$\NotDefinedsech{\alpha}{}(u)=\sum_{n=0}^{\infty}\frac{u^nE^{(\alpha)}_{\alpha n}}{\Gamma(\alpha n+1)}$\\
+then at the mellin transform of $\NotDefinedsech{\alpha}{}(x)$ we make the same substitution and $dx=\frac{1}{\alpha}u^{\frac{1}{\alpha}-1}du$
+\[\mathcal{M}\{\NotDefinedsech{\alpha}{}(x)\}(s)=\int_{0}^{\infty}x^{s-1}\NotDefinedsech{\alpha}{}(x)dx = \frac{1}{\alpha}\int_{0}^{\infty}u^{\frac{s}{\alpha}-\frac{1}{\alpha}}\NotDefinedsech{\alpha}{}(u^{\frac{1}{\alpha}})u^{\frac{1}{\alpha}-1}du\]
+\[\mathcal{M}\{\NotDefinedsech{\alpha}{}(x)\}(s) = \frac{1}{\alpha}\int_{0}^{\infty}u^{\frac{s}{\alpha}-{1}}\NotDefinedsech{\alpha}{}(u^{\frac{1}{\alpha}})du\]
+This is still a Mellin transform ,which means we can use the theorem and equate
+%This intgeral above me looks kinda important to equate with Gamma(s)Beta(s) 
+\[\frac{\varphi(n)}{\Gamma(n+1)}(-1)^n=\frac{E_{\alpha n}^{(\alpha)}}{\Gamma(\alpha n +1)}\implies \varphi(n) = (-1)^n\frac{\Gamma(n+1)}{\Gamma(\alpha n +1)}E_{\alpha n}^{(\alpha)}\]
+therefore
+\[\mathcal{M}\{\NotDefinedsech{\alpha}{}(x)\}(s)=\frac{1}{\alpha}\Gamma(\frac{s}{\alpha})\varphi(-\frac{s}{\alpha})\]
+and
+\[\beta_\alpha(s) = \frac{\Gamma(\frac{s}{\alpha})}{\alpha^2\Gamma(s)}\varphi(-\frac{s}{\alpha}) = (-1)^{-\frac{s}{\alpha}}\frac{\Gamma(\frac{s}{\alpha})}{\alpha^2\Gamma(s)}\frac{\Gamma(-\frac{s}{\alpha}+1)}{\Gamma(-s +1)}E_{-s}^{(\alpha)}\]
+At $s=0$, the Euler number is 1, and the second Gamma ratio is equal to $1$, but for the first Gamma ratio need the recursion formula $s\Gamma(s) = \Gamma(s+1)\implies \Gamma(s) = \frac{\Gamma(s+1)}{s}$
+\[\lim_{s\to 0}\frac{\Gamma(\frac{s}{\alpha})}{\Gamma(s)} = \lim_{s\to 0}\frac{\Gamma(\frac{s}{\alpha}+1)}{\frac{s}{\alpha}}\frac{s}{\Gamma(s)}=\lim_{s\to 0}\frac{\alpha}{s}\frac{s}{1} = \alpha\]
+therefore
+\[\beta_{\alpha}(0) = \frac{1}{\alpha}\]
+using $\Gamma(s)\Gamma(1-s)=\frac{\pi}{\sin(\pi s)}$ for $s\not\in \mathbb{Z}$
+\[\beta_\alpha(s) = (-1)^{-\frac{s}{\alpha}}\frac{\frac{\pi}{\sin(\pi\frac{s}{\alpha})}}{\alpha^2\frac{\pi}{\sin(\pi s)}}E_{-s}^{(\alpha)}=(-1)^{-\frac{s}{\alpha}} \frac{\sin(\pi s)}{\sin(\frac{\pi s}{\alpha})}E^{(\alpha)}_{-s}\]
+This evaluation resolves the simple poles of the denominator at $s \in \mathbb{Z}$ ( It is worth noting that if $\alpha = \frac{p}{q} \in \mathbb{Q}$, the numerator $\sin(\frac{\pi s}{\alpha})$ also vanishes whenever $s$ is a multiple of $p$)\\ 
+Because the zeros of the sine function are simple, the overlapping zeros at these specific integer nodes create removable singularities, preserving the analyticity of the function and ensuring the finite L'Hôpital limit holds universally for all complex and rational $\alpha \setminus \{0\}$
+and this is an analytic continuation for Generalized Euler numbers, in which it captures what the recursion formula doesn't capture, it works for any Complex index $s\in  \mathbb{C}$
+\[E^{(\alpha)}_{-s} = (-1)^{\frac{s}{\alpha}}\alpha^2\frac{\sin(\frac{\pi s}{\alpha})}{\sin(\pi s)}\beta_{\alpha}(s) = (-1)^{\frac{s}{\alpha}}\alpha^2\frac{\Gamma(s)\Gamma(1-s)}{\Gamma(\frac{s}{\alpha})\Gamma(1-\frac{s}{\alpha})}\beta_{\alpha}(s)\]
+but for $s\in \mathbb{Z}$ it returns $\frac{0}{0}$, which means we can use L'hopital Rule
+\[\lim_{s\to k}\frac{\sin(\frac{\pi s}{\alpha})}{\sin(\pi s)}= \lim_{s\to k}\frac{\frac{\pi}{\alpha}\cos(\frac{\pi s}{\alpha})}{\pi \cos(\pi s)} = \frac{1}{\alpha}\frac{\cos(\frac{\pi k}{\alpha})}{(-1)^k}\]
+plugging it back:
+\[E^{(\alpha)}_{-k} = (-1)^{\frac{k}{\alpha}-k}\alpha\cos(\frac{\pi k}{\alpha})\beta_{\alpha}(k)\]
+To ensure the analytic continuation is single-valued and rigorously defined for $\alpha \in \mathbb{C}$, we specify the principal branch of the complex logarithm.\\ Consequently, the multi-valued exponential term is strictly defined as $(-1)^{-\frac{s}{\alpha}} := e^{-\frac{i\pi s}{\alpha}}$ for Im$(s/\alpha) \ge 0$, and $e^{\frac{i\pi s}{\alpha}}$ otherwise, maintaining the parity required by the Euler sequence.\\
+For $\alpha=2$ (The Base Euler Numbers) we have 
+\[E_{-k} = 2(-1)^{\frac{k}{2}-k}\cos(\frac{\pi k}{2})\beta_{}(k)\]
+for $n$ is odd, the value is simply zero,\\
+at $n=2$ we have 
+\[E_{-2} = 2(-1)^{0}\cos({\pi})\beta_{}(2) = 2G\implies G =\frac{E_{-2}}{2}\]
+where $G$ is Catalan's constant, at $n=4$ we have
+\[E_{-4} = 2\beta_{}(4)\]
+\[\beta(2k) = \frac{E_{-2k}}{2(-1)^{\frac{2k}{2}-2k}(-1)^{k}} = \frac{E_{-2k}}{2}\]
+\section{Proving Hardy Growth condition for the relation}
+To rigorously apply Ramanujan's Master Theorem, we must demonstrate that the analytic continuation of the coefficient function $\varphi(w)$ satisfies Hardy’s exponential growth condition: it must be bounded by an exponential type $\tau < \pi$ in the right half-plane.\\
+The generating function for our generalized Euler numbers is $\NotDefinedsech{\alpha}{}(x) = \frac{1}{E_\alpha(x^\alpha)}$, which is an entire function in $x$ for Re$(\alpha) > 0$. The singularities of this generating function correspond to the zeros of the Mittag-Leffler function $E_\alpha(x^\alpha)$.\\
+For the classical case $\alpha = 2$, these zeros occur at $x = i\pi/2 + in\pi$, which yields a canonical exponential type of $\tau(2) = \frac{\pi}{2}$. For a general Re$(\alpha) > 0$, it is a standard result that the Mittag-Leffler function $E_\alpha(z)$ has no zeros on the positive real axis \cite{Gorenflo2014}, and the nearest zeros to the origin yield an exponential type $\tau(\alpha) < \pi$.\\
+By applying the Paley-Wiener theorem for entire functions of exponential type, the analytic continuation of the sequence coefficients $\varphi(w)$ satisfies the bound $|\varphi(w)| \le C e^{\tau(\alpha)|\text{Im}(w)|}$ with $\tau(\alpha) < \pi$.\\
+This satisfies Hardy's condition, rigorously justifying the application of the Mellin-Ramanujan identity across the complex domain.
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}
